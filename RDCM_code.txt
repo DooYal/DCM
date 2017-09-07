@@ -1,0 +1,203 @@
+#include"stdio.h"
+#include"stdlib.h"
+#include"malloc.h"
+#define LEN sizeof(s)
+struct s
+{
+	char type[6];
+int times;
+int length;
+int start;
+int end;
+int imper;
+struct s *next;
+	};
+int n;
+struct s *creat(FILE*fp)
+{struct s *head;
+struct s *p1,*p2;
+n=0;
+p1=p2=(struct s*)malloc(LEN);
+fscanf(fp,"%s %d %d %d %d %d",&(p1->type),&(p1->times),&(p1->length),&(p1->start),&(p1->end),&(p1->imper));
+head=NULL;
+while((p1->type!=0)&&(!feof(fp)))
+{n=n+1;
+if(n==1)
+head=p1;
+else p2->next=p1;
+p2=p1;
+p1=(struct s *)malloc(LEN);
+fscanf(fp,"%s %d %d %d %d %d",&(p1->type),&(p1->times),&(p1->length),&(p1->start),&(p1->end),&(p1->imper));
+
+}
+p2->next=NULL;
+return(head);
+}
+struct txtname
+{
+	char name[10];
+}filename[100]={
+{"B1.txt"},{"B2.txt"},{"B3.txt"},
+{"B4.txt"},{"B5.txt"},{"B6.txt"},
+{"B7.txt"},{"B8.txt"},{"B9.txt"},
+{"B10.txt"},{"B11.txt"},{"B12.txt"},
+{"B13.txt"},{"B14.txt"},{"B15.txt"},
+{"B16.txt"},{"B17.txt"},{"B18.txt"},
+{"B19.txt"},{"B20.txt"},{"B21.txt"},
+{"B22.txt"},{"B23.txt"},{"B24.txt"},
+{"B25.txt"},{"B26.txt"},{"B27.txt"},
+{"B28.txt"},{"B29.txt"},{"B30.txt"},
+{"B31.txt"},{"B32.txt"},{"B33.txt"},
+
+{"C1.txt"},{"C2.txt"},{"C3.txt"},
+{"C4.txt"},{"C5.txt"},{"C6.txt"},
+{"C7.txt"},{"C8.txt"},{"C9.txt"},
+{"C10.txt"},{"C11.txt"},{"C12.txt"},
+{"C13.txt"},{"C14.txt"},{"C15.txt"},
+{"C16.txt"},{"C17.txt"},{"C18.txt"},
+{"C19.txt"},{"C20.txt"},{"C21.txt"},
+{"C22.txt"},
+
+{"H1.txt"},{"H2.txt"},{"H3.txt"},
+{"H4.txt"},{"H5.txt"},{"H6.txt"},
+{"H7.txt"},{"H8.txt"},{"H9.txt"},
+{"H10.txt"},{"H11.txt"},{"H12.txt"},
+{"H13.txt"},{"H14.txt"},{"H15.txt"},
+{"H16.txt"},{"H17.txt"},{"H18.txt"},
+{"H19.txt"},{"H20.txt"},{"H21.txt"},
+{"H22.txt"},{"H23.txt"},{"H24.txt"},
+{"H25.txt"},{"H26.txt"},{"H27.txt"},
+{"H28.txt"},{"H29.txt"},{"H30.txt"},
+{"H31.txt"},{"H32.txt"},{"H33.txt"},
+{"H34.txt"},{"H35.txt"},{"H36.txt"},
+{"H37.txt"},{"H38.txt"},{"H39.txt"},
+{"H40.txt"},{"H41.txt"},{"H42.txt"},
+{"H43.txt"},
+
+ 
+
+
+}
+,*pname=filename;
+
+int main()
+{
+int j;
+int f=1;
+int f1=0;
+struct s* pshu;
+FILE *fp2;
+
+struct filestore
+{char c[30];
+}filestorename[2]={{"result.txt"}},*filestorep;
+filestorep=filestorename;
+int n,g,k,z;
+n=0;
+printf("Please input the largest number of genome\n");
+scanf("%d",&z);
+printf("Please input the window level (solution)(100-4500)\n");
+scanf("%d",&k);
+g=z/k;
+
+
+
+
+
+if((fp2=fopen(filestorep->c,"a"))==0)
+{
+	printf("\nThe file result.txt are not established!!!\n");
+}
+fprintf(fp2,"NO.\tmono\tdi\ttri\ttetra\tpenta\thexa\ttotal\n");
+fclose(fp2);
+
+
+
+
+
+
+
+for(j=0;;)	
+{FILE *fp1;
+if((fp1=fopen(pname->name,"r"))==0)
+{printf("\nThe files can not be read or have all been read off!!!\n");
+int e;
+scanf("%d",&e);}
+int a;
+for (a=0;a<2;a++) fscanf(fp1,"%*[^\n]%*c");
+pshu=creat(fp1);
+fclose(fp1);
+struct outputs
+{
+int mono;
+int di;
+int tri;
+int tetra;
+int penta;
+int hexa;
+int total;} ab[350],*p=ab;
+
+for(n=0;n<g;n++)
+{int m=0,d=0,t=0,te=0,pe=0,h=0;
+
+	while((pshu->start)>(k*n)&&(pshu->start)<=(k*(n+1))&&pshu->next!=NULL)
+{
+
+switch((pshu->length)/(pshu->times))
+{
+case 1: m++; break;
+case 2: d++; break;
+case 3: t++; break;
+case 4: te++; break;
+case 5: pe++; break;
+case 6: h++; break;
+default:printf("default");
+}
+pshu=pshu->next;
+}
+p->mono=m;
+p->di=d;
+p->tri=t;
+p->tetra=te;
+p->penta=pe;
+p->hexa=h;
+p->total=(m+d+t+te+pe+h);
+
+p++;}
+
+p=ab;
+
+printf("%d*******************************************\n",f);
+
+f1++;
+filestorep=filestorename;
+	
+for(n=0;n<g;n++)
+{
+
+	printf("mono=%d\tdi=%d\ttri=%d\ttetra=%d\tpenta=%d\thexa=%d\ttotal=%d\n",p->mono,p->di,p->tri,p->tetra,p->penta,p->hexa,p->total);
+	if((fp2=fopen(filestorep->c,"a"))==0)
+{
+	printf("\nresult.txt are not created!!!\n");
+}
+
+
+
+	fprintf(fp2,"%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n",f1,p->mono,p->di,p->tri,p->tetra,p->penta,p->hexa,p->total);
+	fclose(fp2);
+	
+p++;}
+
+pname++;
+f++;
+
+}
+
+char y;
+printf("\n the text has been written!!!\n");
+
+scanf("%d",&y);
+
+
+
+}
